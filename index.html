@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ An AI Engineer's Portfolio ✨</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pastel-pink: #FFB3D9;
+            --pastel-purple: #E6B3FF;
+            --pastel-blue: #B3D9FF;
+            --pastel-mint: #B3FFD9;
+            --pastel-yellow: #FFFAB3;
+            --pastel-peach: #FFCCB3;
+            --soft-white: #FFFBFF;
+            --pixel-gray: #F0F0F0;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--pastel-pink) 0%, var(--pastel-purple) 25%, var(--pastel-blue) 50%, var(--pastel-mint) 75%, var(--pastel-yellow) 100%);
+            /* min-height: 100vh; - REMOVED this, let content dictate height */
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .pixel-font {
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .pixel-border {
+            border: 4px solid #fff;
+            box-shadow: 
+                0 0 0 4px var(--pastel-pink),
+                0 0 0 8px #fff,
+                0 0 20px rgba(255, 179, 217, 0.3);
+        }
+
+        .pixel-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 3px solid var(--pastel-pink);
+            box-shadow: 0 8px 32px rgba(255, 179, 217, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .pixel-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(255, 179, 217, 0.4);
+            border-color: var(--pastel-purple);
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-delayed {
+            animation: float 3s ease-in-out infinite;
+            animation-delay: -1.5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .sparkle {
+            animation: sparkle 2s linear infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .pixel-btn {
+            background: linear-gradient(45deg, var(--pastel-pink), var(--pastel-purple));
+            border: 3px solid #fff;
+            border-radius: 15px;
+            color: white;
+            font-weight: 600;
+            padding: 12px 24px;
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        /* Ensures anchors styled as buttons act like buttons in layout */
+        .pixel-btn.flex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pixel-btn:hover {
+            background: linear-gradient(45deg, var(--pastel-purple), var(--pastel-blue));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 179, 217, 0.4);
+        }
+
+        .skill-bar {
+            background: var(--pixel-gray);
+            border-radius: 10px;
+            overflow: hidden;
+            height: 20px;
+            border: 2px solid var(--pastel-pink);
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--pastel-pink), var(--pastel-purple));
+            border-radius: 8px;
+            transition: width 2s ease-in-out;
+            position: relative;
+        }
+
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 4px,
+                rgba(255,255,255,0.3) 4px,
+                rgba(255,255,255,0.3) 8px
+            );
+        }
+
+        .pixel-icon {
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        .bounce {
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .rainbow-text {
+            background: linear-gradient(45deg, var(--pastel-pink), var(--pastel-purple), var(--pastel-blue), var(--pastel-mint));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-item {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            color: var(--pastel-purple);
+            transform: translateY(-2px);
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            border: 3px solid var(--pastel-blue);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(179, 217, 255, 0.3);
+            border-color: var(--pastel-purple);
+        }
+
+        .contact-form input, .contact-form textarea {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid var(--pastel-pink);
+            border-radius: 15px;
+            padding: 12px 16px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--pastel-purple);
+            box-shadow: 0 0 0 3px rgba(230, 179, 255, 0.2);
+        }
+
+        .pixel-decoration {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .stars-bg {
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, var(--pastel-yellow), transparent),
+                radial-gradient(2px 2px at 40% 70%, var(--pastel-pink), transparent),
+                radial-gradient(1px 1px at 90% 40%, var(--pastel-blue), transparent),
+                radial-gradient(1px 1px at 50% 50%, var(--pastel-mint), transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+        }
+        
+        /* Centering styles - using Tailwind defaults is usually best, but keeping the custom definition for now */
+        .section-container {
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            align-items: flex-start; 
+            gap: 20px;
+            max-width: 1200px; 
+            margin: 0 auto;
+            padding: 20px;
+            }
+
+        .section-container > div {
+            flex: 1 1 300px;
+            max-width: 350px;
+            }
+
+    </style>
+    
+</head>
+<body class="stars-bg">
+    <nav class="fixed top-0 w-full z-50 bg-white bg-opacity-90 backdrop-filter backdrop-blur-lg border-b-2 border-pink-200">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="pixel-font text-lg rainbow-text">
+                    ✨ Sithaara.dev ✨
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#home" class="nav-item font-semibold">Home</a>
+                    <a href="#about" class="nav-item font-semibold">About</a>
+                    <a href="#skills" class="nav-item font-semibold">Skills</a>
+                    <a href="#projects" class="nav-item font-semibold">Projects</a>
+                    <a href="#contact" class="nav-item font-semibold">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
+        <div class="pixel-decoration top-20 left-10 floating">
+            <img src="https://static.vecteezy.com/system/resources/previews/023/635/238/non_2x/sparkling-pixel-set-sparkling-pixel-set-pastel-heart-pixel-art-bright-yellow-pink-purple-blue-sparkling-pixel-vector.jpg" alt="sparkles" class="w-16 h-16 pixel-icon sparkle">
+        </div>
+        <div class="pixel-decoration top-32 right-20 floating-delayed">
+            <img src="https://i.pinimg.com/736x/de/5d/e0/de5de04aeee4b4173277283fa8e3540d.jpg" alt="pixel heart" class="w-12 h-12 pixel-icon">
+        </div>
+        <div class="pixel-decoration bottom-32 left-20 floating">
+            <i class="fas fa-star text-yellow-300 text-2xl sparkle"></i>
+        </div>
+        <div class="pixel-decoration bottom-40 right-10 floating-delayed">
+            <i class="fas fa-code text-purple-300 text-xl"></i>
+        </div>
+
+        <div class="container mx-auto px-6 text-center">
+            <div class="pixel-card p-12 max-w-4xl mx-auto">
+                <div class="mb-8">
+                    <img src="https://i.pinimg.com/originals/f0/f0/d9/f0f0d932d6e39c7af5aa305cbd8da735.gif" alt="Pixel Coder Girl" class="w-48 h-36 mx-auto pixel-icon bounce">
+                </div>
+                <h1 class="pixel-font text-4xl md:text-6xl rainbow-text mb-6">
+                    Hello World! ✨
+                </h1>
+                <h2 class="text-2xl md:text-3xl text-gray-700 mb-6 font-bold">
+                    I'm a <span class="text-pink-500">Sithaara</span> Jubab Roshan! 💖
+                </h2>
+                <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                    Welcome to my pixel-perfect world of coding magic! ✨<br>
+                    I create beautiful, functional code with love and creativity 🌈
+                </p>
+                <div class="flex flex-col md:flex-row gap-4 justify-center">
+                    <a href="#projects" class="pixel-btn flex items-center justify-center">
+                        <i class="fas fa-code mr-2"></i>
+                        View My Projects
+                    </a>
+                    <a href="**YOUR_LINKEDIN_URL**" target="_blank" class="pixel-btn flex items-center justify-center">
+                        <i class="fab fa-linkedin-in mr-2"></i> Let's Connect!
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="pixel-font text-3xl md:text-4xl rainbow-text mb-4">About Me! 🌸</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-pink-400 to-purple-400 mx-auto"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="pixel-card p-8">
+                    <img src="https://i.pinimg.com/236x/5c/bf/18/5cbf1880c722e136100714f93421d60a.jpg" alt="Kawaii Pixel Girl" class="w-full max-w-xs mx-auto pixel-icon floating">
+                </div>
+                
+                <div class="pixel-card p-8">
+                    <h3 class="text-2xl font-bold text-gray-700 mb-6">
+                        Hi! I'm a Btech in AI and Data Science Second Year student! ✨
+                    </h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        I'm a passionate developer who believes coding should be fun, creative, and filled with innovative vibes! 🌈 
+                        I love turning ideas into realities with clean, beautiful code.
+                    </p>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        When I'm not coding, you can find me collecting cute stickers, playing cozy games, 
+                        or dreaming up new creative projects! 🎮✨
+                    </p>
+                    <div class="flex flex-wrap gap-3 mt-6">
+                        <span class="px-4 py-2 bg-pink-100 text-pink-700 rounded-full text-sm font-semibold">💖 Creative Coder</span>
+                        <span class="px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold">🌸 Constant Thinker</span>
+                        <span class="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">✨ Problem Solver</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="pixel-font text-3xl md:text-4xl rainbow-text mb-4">My Skills!🎯</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-400 to-mint-400 mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="pixel-card p-8">
+                    <h3 class="text-xl font-bold text-gray-700 mb-6 flex items-center">
+                        <i class="fas fa-laptop-code text-pink-500 mr-3"></i>
+                        Programming Skills✨
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-semibold text-gray-700">Python 💖</span>
+                                <span class="text-pink-500 font-semibold">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-semibold text-gray-700">C 🌟</span>
+                                <span class="text-purple-500 font-semibold">95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-semibold text-gray-700">R 🌸</span>
+                                <span class="text-blue-500 font-semibold">60%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pixel-card p-8">
+                    <h3 class="text-xl font-bold text-gray-700 mb-6 flex items-center">
+                        <i class="fas fa-microchip text-pink-500 mr-3"></i>
+                        Tech Skills ✨ </h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-semibold text-gray-700">Data Analysis💖</span>
+                                <span class="text-pink-500 font-semibold">70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-semibold text-gray-700">Generative AI🌟</span>
+                                <span class="text-purple-500 font-semibold">88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-semibold text-gray-700">Prompt engineering🌸</span>
+                                <span class="text-blue-500 font-semibold">96%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 96%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-semibold text-gray-700">Vibe coding💜</span>
+                                <span class="text-mint-500 font-semibold">75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pixel-card p-8">
+                    <h3 class="text-xl font-bold text-gray-700 mb-6 flex items-center">
+                        <i class="fas fa-server text-purple-500 mr-3"></i>
+                        Tools🚀
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-semibold text-gray-700">Canva💙</span>
+                                <span class="text-pink-500 font-semibold">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-semibold text-gray-700">Git & GitHub🐈</span>
+                                <span class="text-purple-500 font-semibold">78%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 78%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-semibold text-gray-700">ChatGPT, Claude, Gemini🧠</span>
+                                <span class="text-blue-500 font-semibold">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-semibold text-gray-700">API Design 🌈</span>
+                                <span class="text-mint-500 font-semibold">73%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 73%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <div class="pixel-card p-8 inline-block">
+                    <img src="https://thumbs.dreamstime.com/b/pastel-pink-blue-pixel-art-laptop-illustration-pastel-pink-blue-pixel-art-laptop-illustration-380180624.jpg" alt="Pixel Laptop" class="w-32 h-32 mx-auto pixel-icon floating mb-4">
+                    <p class="text-gray-600 font-semibold">
+                        Always learning new technologies with energy and enthusiasm! 💫
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="pixel-font text-3xl md:text-4xl rainbow-text mb-4">My Little Projects!🎨</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="project-card">
+                    <div class="p-6">
+                        <div class="mb-4 text-center">
+                            <i class="fas fa-heart text-4xl text-pink-500 mb-3"></i>
+                            <h3 class="text-xl font-bold text-gray-700">Imposter game</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            A fun word game, where players have to figure out who the imposter among them is🌸
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-pink-100 text-pink-600 rounded text-xs">Python</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-600 rounded text-xs">VS Code</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded text-xs">Local Storage</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="pixel-btn text-sm flex-1">
+                                <i class="fas fa-eye mr-1"></i> Demo
+                            </button>
+                            <a href="**PROJECT_GITHUB_URL**" target="_blank" class="pixel-btn text-sm flex-1 flex items-center justify-center">
+                                <i class="fab fa-github mr-1"></i> Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="p-6">
+                        <div class="mb-4 text-center">
+                            <img src="https://icones.pro/wp-content/uploads/2021/03/icone-d-arc-mignon-en-pixels-rouge.png" 
+                                alt="Loading bar" class="w-16 h-16 mx-auto">
+                            <h3 class="text-xl font-bold text-gray-700">Many other works in progress!!</h3>
+                    </div>
+                        <p class="text-gray-600 mb-4">
+                           Please wait until I sort the chaos here 🎮
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    
+    <section id="achievements" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="pixel-font text-3xl md:text-4xl rainbow-text mb-4">My Tiny Achievements!!🏆</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="project-card">
+                    <div class="p-6">
+                        <div class="mb-4 text-center">
+                            <img src="https://static.vecteezy.com/system/resources/previews/034/127/831/non_2x/cute-pink-star-icon-design-for-print-wallpaper-kids-and-etc-free-png.png" alt="Pink Star" class="w-16 h-16 mx-auto mb-3">
+                            <h3 class="text-xl font-bold text-gray-700">Publication of paper</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Leveraging Infant Brain Wave Patterns for Advanced Adaptive AI Learning Models – Published in Conexus, RSET Micro Journal, 2025🌸
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-pink-100 text-pink-600 rounded text-xs">Jupyter Notebook</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-600 rounded text-xs">Google Colabs</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded text-xs">Python</span>
+                            <span class="px-2 py-1 bg-yellow-100 text-pink-600 rounded text-xs">Matplotlib</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="**CERTIFICATE_LINK_1**" target="_blank" class="pixel-btn text-sm flex-1 flex items-center justify-center">
+                                <i class="fas fa-eye mr-1"></i> Certificate
+                            </a>
+                            <a href="**PAPER_LINK_1**" target="_blank" class="pixel-btn text-sm flex-1 flex items-center justify-center">
+                                <i class="fas fa-link mr-1"></i> Link </a>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="project-card">
+                    <div class="p-6">
+                        <div class="mb-4 text-center">
+                            <img src="https://static.vecteezy.com/system/resources/previews/034/127/831/non_2x/cute-pink-star-icon-design-for-print-wallpaper-kids-and-etc-free-png.png" alt="Pink Star" class="w-16 h-16 mx-auto mb-3">
+                            <h3 class="text-xl font-bold text-gray-700">Winner of Energy Hackathon</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            48-hour Hackathon held as part of Confluence 2.0 (ICASD-2025). We were awarded a cash prize of ₹25,000 🌸
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-pink-100 text-pink-600 rounded text-xs">STEAG</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-600 rounded text-xs">Sustainable campus</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded text-xs">Teamwork</span>
+                            
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="**CERTIFICATE_LINK_2**" target="_blank" class="pixel-btn text-sm flex-1 flex items-center justify-center">
+                                <i class="fas fa-eye mr-1"></i> Certificate
+                            </a>
+                            <a href="**HACKATHON_LINK_2**" target="_blank" class="pixel-btn text-sm flex-1 flex items-center justify-center">
+                                <i class="fas fa-link mr-1"></i> Link
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="p-6">
+                        <div class="mb-4 text-center">
+                            <img src="https://icones.pro/wp-content/uploads/2021/03/icone-d-arc-mignon-en-pixels-rouge.png" alt="Loading bar" class="w-16 h-16 mx-auto">
+                            <h3 class="text-xl font-bold text-gray-700">Leveling Up!!</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                           Powered by curiosity, fueled by passion, aiming higher every day🤩
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>            
+
+    <section id="contact" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="pixel-font text-3xl md:text-4xl rainbow-text mb-4">Let's Be Friends! 💌</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-mint-400 to-yellow-400 mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                <div class="pixel-card p-8">
+                    <h3 class="text-2xl font-bold text-gray-700 mb-6 text-center">
+                        Send Me a Message! ✨
+                    </h3>
+                    <form class="contact-form space-y-4">
+                        <div>
+                            <input type="text" placeholder="Your Sweet Name 🌸" class="w-full" required>
+                        </div>
+                        <div>
+                            <input type="email" placeholder="Your Email ✉️" class="w-full" required>
+                        </div>
+                        <div>
+                            <input type="text" placeholder="What's the matter about? 💫" class="w-full" required>
+                        </div>
+                        <div>
+                            <textarea rows="5" placeholder="Your Message 💖 Tell me about your project ideas!" class="w-full resize-none" required></textarea>
+                        </div>
+                        <button type="submit" class="pixel-btn w-full">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            Send it! 💕
+                        </button>
+                    </form>
+                </div>
+
+                <div class="pixel-card p-8">
+                    <h3 class="text-2xl font-bold text-gray-700 mb-6 text-center">
+                        Find Me Online! 🌐
+                    </h3>
+                    
+                    <div class="space-y-6">
+                        <a href="https://github.com/sithaara-haveline" target="_blank" class="flex items-center p-4 bg-pink-50 rounded-lg hover:bg-pink-100 transition-colors cursor-pointer">
+                            <i class="fab fa-github text-2xl text-pink-500 mr-4"></i>
+                            <div>
+                                <h4 class="font-semibold text-gray-700">GitHub</h4>
+                                <p class="text-gray-600 text-sm">Check out my little codes! 💖</p>
+                            </div>
+                        </a>
+                        
+                        <a href="www.linkedin.com/in/sithaara-jubab" target="_blank" class="flex items-center p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors cursor-pointer">
+                            <i class="fab fa-linkedin text-2xl text-purple-500 mr-4"></i>
+                            <div>
+                                <h4 class="font-semibold text-gray-700">LinkedIn</h4>
+                                <p class="text-gray-600 text-sm">Let's connect professionally! 🌟</p>
+                            </div>
+                        </a>
+                        
+                        
+                        <div class="flex items-center p-4 bg-mint-50 rounded-lg hover:bg-mint-100 transition-colors">
+                            <i class="fas fa-envelope text-2xl text-green-500 mr-4"></i>
+                            <div>
+                                <h4 class="font-semibold text-gray-700">Email</h4>
+                                <p class="text-gray-600 text-sm"><a href="mailto:youremail@rajagiri.edu.in">youremail@rajagiri.edu.in</a> 💌</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 text-center">
+                        <img src="https://static.vecteezy.com/system/resources/thumbnails/051/988/381/small/set-of-pixel-8-bit-elements-pixelated-pastel-color-speech-bubbles-with-text-emoticon-with-face-and-cat-stars-shape-on-white-background-vector.jpg" alt="Pixel Elements" class="w-48 h-32 mx-auto pixel-icon floating">
+                        <p class="text-gray-600 mt-4 font-semibold">
+                            Can't wait to hear from you! ✨
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 bg-white bg-opacity-90 backdrop-filter backdrop-blur-lg border-t-2 border-pink-200">
+        <div class="container mx-auto px-6 text-center">
+            <div class="mb-6">
+                <div class="pixel-font text-2xl rainbow-text mb-4">
+                    ✨ Sithaara.dev ✨
+                </div>
+                <p class="text-gray-600">
+                    Made with 💖 and lots of mistakes but i still worked hard on this!
+                </p>
+            </div>
+            
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="https://github.com/sithaara-haveline" target="_blank" title="GitHub">
+                    <i class="fab fa-github text-pink-400 text-2xl hover:text-pink-600 transition-colors sparkle"></i>
+                </a>
+                <a href="www.linkedin.com/in/sithaara-jubab" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin text-purple-400 text-2xl hover:text-purple-600 transition-colors sparkle"></i>
+                </a>
+                <a href="mailto:u2408077@rajagiri.edu.in" title="Email">
+                    <i class="fas fa-envelope text-mint-400 text-2xl hover:text-mint-600 transition-colors sparkle"></i>
+                </a>
+            </div>
+            
+            <div class="border-t border-pink-200 pt-6">
+                <p class="text-gray-500 text-sm">
+                    © 2025 Sithaara.dev • Reaching for the stars through code! 🌈
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+
+</body>
+</html>

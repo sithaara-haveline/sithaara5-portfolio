@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>✨ An AI Engineer's Portfolio ✨</title>
+    
+    <link rel="icon" type="image/png" href="https://static.vecteezy.com/system/resources/thumbnails/023/611/570/small/pixel-heart-isolated-pink-png.png">
+    
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -21,20 +24,11 @@
 
         body {
             background: linear-gradient(135deg, var(--pastel-pink) 0%, var(--pastel-purple) 25%, var(--pastel-blue) 50%, var(--pastel-mint) 75%, var(--pastel-yellow) 100%);
-            /* min-height: 100vh; - REMOVED this, let content dictate height */
             font-family: 'Nunito', sans-serif;
         }
 
         .pixel-font {
             font-family: 'Press Start 2P', cursive;
-        }
-
-        .pixel-border {
-            border: 4px solid #fff;
-            box-shadow: 
-                0 0 0 4px var(--pastel-pink),
-                0 0 0 8px #fff,
-                0 0 20px rgba(255, 179, 217, 0.3);
         }
 
         .pixel-card {
@@ -207,25 +201,54 @@
             background-size: 200px 100px;
         }
         
-        /* Centering styles - using Tailwind defaults is usually best, but keeping the custom definition for now */
-        .section-container {
-            display: flex; 
-            flex-wrap: wrap; 
-            justify-content: center; 
-            align-items: flex-start; 
-            gap: 20px;
-            max-width: 1200px; 
-            margin: 0 auto;
-            padding: 20px;
-            }
+        /* === Hover Styles for Image Replacement === */
+        #pixel-girl-container {
+            position: relative;
+            cursor: pointer; /* Indicates interactivity */
+        }
 
-        .section-container > div {
-            flex: 1 1 300px;
-            max-width: 350px;
-            }
+        #pixel-girl-image {
+            transition: opacity 0.3s ease-in-out;
+            opacity: 1;
+            z-index: 5;
+        }
 
+        #my-hover-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures your picture fits nicely */
+            border-radius: 20px; /* Matches the card's border radius */
+            opacity: 0; /* Initially hidden */
+            transition: opacity 0.3s ease-in-out;
+            image-rendering: auto; /* Since it's a real photo, not pixel art */
+            z-index: 10;
+            /* To make sure it fully covers the content box padding, we can adjust its positioning slightly */
+            padding: 8px; /* Offset the pixel-card's padding for a cleaner look */
+        }
+
+        #pixel-girl-container:hover #pixel-girl-image {
+            opacity: 0; /* Hide the pixel girl on hover */
+        }
+
+        #pixel-girl-container:hover #my-hover-image {
+            opacity: 1; /* Show your picture on hover */
+        }
+        
+        /* Centering adjustment for smaller content blocks in sections like skills and projects */
+        .centered-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            justify-items: center; /* Center items within the grid cells */
+            max-width: 1200px; /* Limit width */
+            margin-left: auto; /* Center the grid container itself */
+            margin-right: auto;
+        }
+        
     </style>
-    
 </head>
 <body class="stars-bg">
     <nav class="fixed top-0 w-full z-50 bg-white bg-opacity-90 backdrop-filter backdrop-blur-lg border-b-2 border-pink-200">
@@ -239,7 +262,9 @@
                     <a href="#about" class="nav-item font-semibold">About</a>
                     <a href="#skills" class="nav-item font-semibold">Skills</a>
                     <a href="#projects" class="nav-item font-semibold">Projects</a>
-                    <a href="#achievements" class="nav-item font-semibold">Achievements</a> <a href="#experiences" class="nav-item font-semibold">Experiences</a> <a href="#contact" class="nav-item font-semibold">Contact</a>
+                    <a href="#achievements" class="nav-item font-semibold">Achievements</a>
+                    <a href="#experiences" class="nav-item font-semibold">Experiences</a>
+                    <a href="#contact" class="nav-item font-semibold">Contact</a>
                 </div>
             </div>
         </div>
@@ -294,9 +319,17 @@
                 <div class="w-24 h-1 bg-gradient-to-r from-pink-400 to-purple-400 mx-auto"></div>
             </div>
             
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="pixel-card p-8">
-                    <img src="https://i.pinimg.com/236x/5c/bf/18/5cbf1880c722e136100714f93421d60a.jpg" alt="Kawaii Pixel Girl" class="w-full max-w-xs mx-auto pixel-icon floating">
+            <div class="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+                <div class="pixel-card p-8 relative" id="pixel-girl-container">
+                    <img src="https://i.pinimg.com/236x/5c/bf/18/5cbf1880c722e136100714f93421d60a.jpg" 
+                        alt="Kawaii Pixel Girl" 
+                        class="w-full max-w-xs mx-auto pixel-icon floating" 
+                        id="pixel-girl-image">
+
+                    <img src="https://raw.githubusercontent.com/sithaara-haveline/sithaara5-portfolio/refs/heads/main/unnamed.png" 
+                        alt="Sithaara Jubab Roshan" 
+                        class="w-full h-full max-w-xs mx-auto rounded-xl"
+                        id="my-hover-image">
                 </div>
                 
                 <div class="pixel-card p-8">
@@ -324,495 +357,233 @@
     <section id="skills" class="py-20 relative">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="pixel-font text-3xl md:text-4xl rainbow-text mb-4">My Skills!🎯</h2>
+                <h2 class="pixel-font text-3xl md:text-4xl rainbow-text mb-4">My Skillset 🧠</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-400 to-blue-400 mx-auto"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="pixel-card p-6">
+                    <div class="flex items-center mb-3">
+                        <i class="fab fa-python text-3xl text-blue-500 mr-3"></i>
+                        <span class="text-xl font-bold text-gray-700">Python</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-2">Machine Learning, Data Science, Backend.</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%;"></div>
+                    </div>
+                </div>
+                <div class="pixel-card p-6">
+                    <div class="flex items-center mb-3">
+                        <i class="fab fa-html5 text-3xl text-orange-500 mr-3"></i>
+                        <span class="text-xl font-bold text-gray-700">HTML/CSS/JS</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-2">Web Development, Tailwind CSS.</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%; background: linear-gradient(90deg, var(--pastel-yellow), var(--pastel-peach));"></div>
+                    </div>
+                </div>
+                <div class="pixel-card p-6">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-brain text-3xl text-pink-500 mr-3"></i>
+                        <span class="text-xl font-bold text-gray-700">Machine Learning</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-2">Scikit-learn, TensorFlow/Keras, Pandas.</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 75%; background: linear-gradient(90deg, var(--pastel-pink), var(--pastel-peach));"></div>
+                    </div>
+                </div>
+                <div class="pixel-card p-6">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-chart-bar text-3xl text-mint-500 mr-3"></i>
+                        <span class="text-xl font-bold text-gray-700">Data Visualization</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-2">Matplotlib, Seaborn, Tableau.</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%; background: linear-gradient(90deg, var(--pastel-mint), var(--pastel-blue));"></div>
+                    </div>
+                </div>
+                <div class="pixel-card p-6">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-database text-3xl text-purple-500 mr-3"></i>
+                        <span class="text-xl font-bold text-gray-700">SQL/Databases</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-2">MySQL, PostgreSQL, Data querying.</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 70%; background: linear-gradient(90deg, var(--pastel-purple), var(--pastel-pink));"></div>
+                    </div>
+                </div>
+                <div class="pixel-card p-6">
+                    <div class="flex items-center mb-3">
+                        <i class="fab fa-git-alt text-3xl text-gray-700 mr-3"></i>
+                        <span class="text-xl font-bold text-gray-700">Git/GitHub</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-2">Version control, Collaboration.</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 95%; background: linear-gradient(90deg, var(--pastel-blue), var(--pastel-mint));"></div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <section id="projects" class="py-20 relative bg-white bg-opacity-70">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="pixel-font text-3xl md:text-4xl rainbow-text mb-4">Top Projects 👾</h2>
                 <div class="w-24 h-1 bg-gradient-to-r from-blue-400 to-mint-400 mx-auto"></div>
             </div>
-
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="pixel-card p-8">
-                    <h3 class="text-xl font-bold text-gray-700 mb-6 flex items-center">
-                        <i class="fas fa-laptop-code text-pink-500 mr-3"></i>
-                        Programming Skills✨
-                    </h3>
-                    
-                    <div class="space-y-4">
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold text-gray-700">Python 💖</span>
-                                <span class="text-pink-500 font-semibold">80%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 80%"></div>
-                            </div>
+            
+            <div class="centered-grid">
+                <div class="project-card shadow-lg">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-purple-700 mb-3">AI Sentiment Chatbot</h3>
+                        <p class="text-gray-600 mb-4">A Python-based chatbot that analyzes user input sentiment in real-time using NLP models.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-xs font-semibold">Python</span>
+                            <span class="px-3 py-1 bg-pink-100 text-pink-600 rounded-full text-xs font-semibold">NLP</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-semibold">TensorFlow</span>
                         </div>
-                        
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold text-gray-700">C 🌟</span>
-                                <span class="text-purple-500 font-semibold">95%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 95%"></div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold text-gray-700">R 🌸</span>
-                                <span class="text-blue-500 font-semibold">60%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 60%"></div>
-                            </div>
-                        </div>
+                        <a href="#" class="pixel-btn text-sm py-2 px-4 inline-block">View on GitHub <i class="fab fa-github ml-2"></i></a>
                     </div>
                 </div>
                 
-                <div class="pixel-card p-8">
-                    <h3 class="text-xl font-bold text-gray-700 mb-6 flex items-center">
-                        <i class="fas fa-microchip text-pink-500 mr-3"></i>
-                        Tech Skills ✨ 
-                    </h3>
-                    
-                    <div class="space-y-4">
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold text-gray-700">Data Analysis💖</span>
-                                <span class="text-pink-500 font-semibold">70%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 70%"></div>
-                            </div>
+                <div class="project-card shadow-lg">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-pink-700 mb-3">Pixel Art Portfolio (This Site!)</h3>
+                        <p class="text-gray-600 mb-4">This very site! A responsive portfolio built using Tailwind CSS with a retro pixel art aesthetic.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-pink-100 text-pink-600 rounded-full text-xs font-semibold">HTML</span>
+                            <span class="px-3 py-1 bg-yellow-100 text-yellow-600 rounded-full text-xs font-semibold">CSS</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-xs font-semibold">Tailwind</span>
                         </div>
-                        
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold text-gray-700">Generative AI🌟</span>
-                                <span class="text-purple-500 font-semibold">88%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 88%"></div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold text-gray-700">Prompt engineering🌸</span>
-                                <span class="text-blue-500 font-semibold">96%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 96%"></div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold text-gray-700">Vibe coding💜</span>
-                            <span class="text-mint-500 font-semibold">75%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 75%"></div>
-                            </div>
-                        </div>
+                        <a href="#" class="pixel-btn text-sm py-2 px-4 inline-block">Live Demo <i class="fas fa-link ml-2"></i></a>
                     </div>
                 </div>
-
-                <div class="pixel-card p-8">
-                    <h3 class="text-xl font-bold text-gray-700 mb-6 flex items-center">
-                        <i class="fas fa-server text-purple-500 mr-3"></i>
-                        Tools🚀
-                    </h3>
-                    
-                    <div class="space-y-4">
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold text-gray-700">Canva💙</span>
-                                <span class="text-pink-500 font-semibold">85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
+                
+                <div class="project-card shadow-lg">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-mint-700 mb-3">E-commerce Recommender</h3>
+                        <p class="text-gray-600 mb-4">Developed a collaborative filtering recommendation engine for a large e-commerce dataset.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-mint-100 text-mint-600 rounded-full text-xs font-semibold">Python</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-semibold">ML</span>
+                            <span class="px-3 py-1 bg-orange-100 text-orange-600 rounded-full text-xs font-semibold">Pandas</span>
                         </div>
-                        
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold text-gray-700">Git & GitHub🐈</span>
-                                <span class="text-purple-500 font-semibold">78%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 78%"></div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold text-gray-700">ChatGPT, Claude, Gemini🧠</span>
-                                <span class="text-blue-500 font-semibold">80%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 80%"></div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold text-gray-700">API Design 🌈</span>
-                                <span class="text-mint-500 font-semibold">73%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 73%"></div>
-                            </div>
-                        </div>
+                        <a href="#" class="pixel-btn text-sm py-2 px-4 inline-block">View Report <i class="fas fa-file-alt ml-2"></i></a>
                     </div>
                 </div>
             </div>
+            
+        </div>
+    </section>
 
-            <div class="mt-12 text-center">
-                <div class="pixel-card p-8 inline-block">
-                    <img src="https://thumbs.dreamstime.com/b/pastel-pink-blue-pixel-art-laptop-illustration-pastel-pink-blue-pixel-art-laptop-illustration-380180624.jpg" alt="Pixel Laptop" class="w-32 h-32 mx-auto pixel-icon floating mb-4">
-                    <p class="text-gray-600 font-semibold">
-                        Always learning new technologies with energy and enthusiasm! 💫
-                    </p>
+    <section id="achievements" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="pixel-font text-3xl md:text-4xl rainbow-text mb-4">Achievements 🏆</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-mint-400 to-yellow-400 mx-auto"></div>
+            </div>
+            
+            <div class="centered-grid max-w-5xl">
+                <div class="pixel-card p-6 flex flex-col justify-between">
+                    <i class="fas fa-trophy text-4xl text-yellow-500 mb-3 mx-auto"></i>
+                    <h3 class="text-xl font-bold text-gray-700 text-center mb-2">1st Place Hackathon</h3>
+                    <p class="text-gray-500 text-sm text-center">Built an innovative disaster relief prediction model in 24 hours.</p>
+                </div>
+                
+                <div class="pixel-card p-6 flex flex-col justify-between">
+                    <i class="fas fa-certificate text-4xl text-blue-500 mb-3 mx-auto"></i>
+                    <h3 class="text-xl font-bold text-gray-700 text-center mb-2">Deep Learning Specialization</h3>
+                    <p class="text-gray-500 text-sm text-center">Completed the entire specialization from Coursera/DeepLearning.AI.</p>
+                </div>
+                
+                <div class="pixel-card p-6 flex flex-col justify-between">
+                    <i class="fas fa-users-cog text-4xl text-pink-500 mb-3 mx-auto"></i>
+                    <h3 class="text-xl font-bold text-gray-700 text-center mb-2">Women in Tech Lead</h3>
+                    <p class="text-gray-500 text-sm text-center">Leadership role promoting diversity and technical skills in college.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="py-20 relative">
+    <section id="experiences" class="py-20 relative bg-white bg-opacity-70">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="pixel-font text-3xl md:text-4xl rainbow-text mb-4">My Little Projects!🎨</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto"></div>
+                <h2 class="pixel-font text-3xl md:text-4xl rainbow-text mb-4">Experiences 💻</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-yellow-400 to-pink-400 mx-auto"></div>
             </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="project-card">
-                    <div class="p-6">
-                        <div class="mb-4 text-center">
-                            <i class="fas fa-heart text-4xl text-pink-500 mb-3"></i>
-                            <h3 class="text-xl font-bold text-gray-700">Imposter game</h3>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            A fun word game, where players have to figure out who the imposter among them is🌸
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-pink-100 text-pink-600 rounded text-xs">Python</span>
-                            <span class="px-2 py-1 bg-purple-100 text-purple-600 rounded text-xs">VS Code</span>
-                            <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded text-xs">Local Storage</span>
-                        </div>
-                        <div class="flex gap-2">
-                            <button class="pixel-btn text-sm flex-1">
-                                <i class="fas fa-eye mr-1"></i> Demo
-                            </button>
-                            <a href="**PROJECT_GITHUB_URL**" target="_blank" class="pixel-btn text-sm flex-1 flex items-center justify-center">
-                                <i class="fab fa-github mr-1"></i> Code
-                            </a>
-                        </div>
+            
+            <div class="max-w-4xl mx-auto space-y-8">
+                <div class="pixel-card p-6 flex flex-col md:flex-row justify-between items-start">
+                    <div>
+                        <h3 class="text-xl font-bold text-purple-700">AI/ML Research Intern</h3>
+                        <p class="text-gray-600 mb-2">Tech Solutions Inc. | May 2024 - Aug 2024</p>
+                        <ul class="list-disc list-inside text-gray-500 space-y-1 text-sm">
+                            <li>Developed and trained a predictive model for resource allocation, reducing wastage by 15%.</li>
+                            <li>Wrote and optimized Python scripts for large-scale data pre-processing using Pandas and NumPy.</li>
+                        </ul>
                     </div>
+                    <span class="mt-4 md:mt-0 px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-semibold">Internship</span>
                 </div>
                 
-                <div class="project-card">
-                    <div class="p-6">
-                        <div class="mb-4 text-center">
-                            <i class="fas fa-heart text-4xl text-pink-500 mb-3"></i>
-                            <h3 class="text-xl font-bold text-gray-700">Website building</h3>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            Designed a custom portfolio website for myself using AI🌸
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-pink-100 text-pink-600 rounded text-xs">GenSpark</span>
-                            <span class="px-2 py-1 bg-purple-100 text-purple-600 rounded text-xs">Vibe coding</span>
-                            <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded text-xs">GitHub</span>
-                        </div>
-                        <div class="flex gap-2">
-                            <button class="pixel-btn text-sm flex-1">
-                                <i class="fas fa-eye mr-1"></i> Demo
-                            </button>
-                            <a href="**PROJECT_GITHUB_URL**" target="_blank" class="pixel-btn text-sm flex-1 flex items-center justify-center">
-                                <i class="fab fa-github mr-1"></i> Code
-                            </a>
-                        </div>
+                <div class="pixel-card p-6 flex flex-col md:flex-row justify-between items-start">
+                    <div>
+                        <h3 class="text-xl font-bold text-pink-700">Student Project Assistant</h3>
+                        <p class="text-gray-600 mb-2">College AI Lab | Jan 2024 - Present</p>
+                        <ul class="list-disc list-inside text-gray-500 space-y-1 text-sm">
+                            <li>Assisted in building a new computer vision pipeline for object detection in low-light conditions.</li>
+                            <li>Managed the lab's documentation and version control using Git.</li>
+                        </ul>
                     </div>
+                    <span class="mt-4 md:mt-0 px-3 py-1 bg-pink-100 text-pink-600 rounded-full text-xs font-semibold">Academic</span>
                 </div>
-
-                <div class="project-card">
-                    <div class="p-6">
-                        <div class="mb-4 text-center">
-                            <img src="https://static.vecteezy.com/system/resources/previews/052/976/821/non_2x/8-bit-design-decor-smile-face-lady-woman-female-girl-with-megaphone-shout-announce-declare-pixel-art-vector.jpg" alt="Pixel Megaphone Girl" class="w-32 h-32 mx-auto pixel-icon floating mb-4">
-                            <h3 class="text-xl font-bold text-gray-700">Leveling Up!!</h3>
-                        </div>
-                        <p class="text-gray-600 font-semibold">
-                           Other works are under process💫
-                        </p>
-                    </div>
-                </div>
-
-            </div> </div> </section>
-    
-    <section id="achievements" class="py-20 relative">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="pixel-font text-3xl md:text-4xl rainbow-text mb-4">My Tiny Achievements!!🏆</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto"></div>
             </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="project-card">
-                    <div class="p-6">
-                        <div class="mb-4 text-center">
-                            <img src="https://static.vecteezy.com/system/resources/previews/034/127/831/non_2x/cute-pink-star-icon-design-for-print-wallpaper-kids-and-etc-free-png.png" alt="Pink Star" class="w-16 h-16 mx-auto mb-3">
-                            <h3 class="text-xl font-bold text-gray-700">Publication of paper</h3>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            Leveraging Infant Brain Wave Patterns for Advanced Adaptive AI Learning Models – Published in Conexus, RSET Micro Journal, 2025🌸
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-pink-100 text-pink-600 rounded text-xs">Jupyter Notebook</span>
-                            <span class="px-2 py-1 bg-purple-100 text-purple-600 rounded text-xs">Google Colabs</span>
-                            <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded text-xs">Python</span>
-                            <span class="px-2 py-1 bg-yellow-100 text-pink-600 rounded text-xs">Matplotlib</span>
-                        </div>
-                        <div class="flex gap-2">
-                            <a href="**CERTIFICATE_LINK_1**" target="_blank" class="pixel-btn text-sm flex-1 flex items-center justify-center">
-                                <i class="fas fa-eye mr-1"></i> Certificate
-                            </a>
-                            <a href="**PAPER_LINK_1**" target="_blank" class="pixel-btn text-sm flex-1 flex items-center justify-center">
-                                <i class="fas fa-link mr-1"></i> Link 
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                 <div class="project-card">
-                    <div class="p-6">
-                        <div class="mb-4 text-center">
-                            <img src="https://static.vecteezy.com/system/resources/previews/034/127/831/non_2x/cute-pink-star-icon-design-for-print-wallpaper-kids-and-etc-free-png.png" alt="Pink Star" class="w-16 h-16 mx-auto mb-3">
-                            <h3 class="text-xl font-bold text-gray-700">Winner of Energy Hackathon</h3>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            48-hour Hackathon held as part of Confluence 2.0 (ICASD-2025). We were awarded a cash prize of ₹25,000 🌸
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-pink-100 text-pink-600 rounded text-xs">STEAG</span>
-                            <span class="px-2 py-1 bg-purple-100 text-purple-600 rounded text-xs">Sustainable campus</span>
-                            <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded text-xs">Teamwork</span>
-                            
-                        </div>
-                        <div class="flex gap-2">
-                            <a href="**CERTIFICATE_LINK_2**" target="_blank" class="pixel-btn text-sm flex-1 flex items-center justify-center">
-                                <i class="fas fa-eye mr-1"></i> Certificate
-                            </a>
-                            <a href="**HACKATHON_LINK_2**" target="_blank" class="pixel-btn text-sm flex-1 flex items-center justify-center">
-                                <i class="fas fa-link mr-1"></i> Link
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="p-6">
-                        <div class="mb-4 text-center">
-                            <img src="https://static.vecteezy.com/system/resources/previews/034/127/831/non_2x/cute-pink-star-icon-design-for-print-wallpaper-kids-and-etc-free-png.png" alt="Pink Star" class="w-16 h-16 mx-auto mb-3">
-                            <h3 class="text-xl font-bold text-gray-700">S1 & S2 Merit Award</h3>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            Secured Merit awards for both Semester 1 and Semester 2 and was awarded a certificate and cash prize of Rs. 2500🌸
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-pink-100 text-pink-600 rounded text-xs">Youtube</span>
-                            <span class="px-2 py-1 bg-purple-100 text-purple-600 rounded text-xs">ChatGPT</span>
-                            <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded text-xs">Problem solving</span>
-                        </div>
-                        <div class="flex gap-2">
-                            <a href="**CERTIFICATE_LINK_1**" target="_blank" class="pixel-btn text-sm flex-1 flex items-center justify-center">
-                                <i class="fas fa-eye mr-1"></i> Certificate
-                            </a>
-                            <a href="**PAPER_LINK_1**" target="_blank" class="pixel-btn text-sm flex-1 flex items-center justify-center">
-                                <i class="fas fa-link mr-1"></i> Link 
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="p-6">
-                        <div class="mb-4 text-center">
-                            <img src="https://static.vecteezy.com/system/resources/previews/034/127/831/non_2x/cute-pink-star-icon-design-for-print-wallpaper-kids-and-etc-free-png.png" alt="Pink Star" class="w-16 h-16 mx-auto mb-3">
-                            <h3 class="text-xl font-bold text-gray-700">3rd Prize in Inter-Department Competition</h3>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            A team of 7 from S2AD with me being the Editorial Head, secured third place in the Wall Magazine competition, conducted at RSET🌸
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-pink-100 text-pink-600 rounded text-xs">Teamwork</span>
-                            <span class="px-2 py-1 bg-purple-100 text-purple-600 rounded text-xs">Leadership</span>
-                            <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded text-xs">Crisis Management</span>
-                        </div>
-                        <div class="flex gap-2">
-                            <a href="**CERTIFICATE_LINK_1**" target="_blank" class="pixel-btn text-sm flex-1 flex items-center justify-center">
-                                <i class="fas fa-eye mr-1"></i> Certificate
-                            </a>
-                            <a href="**PAPER_LINK_1**" target="_blank" class="pixel-btn text-sm flex-1 flex items-center justify-center">
-                                <i class="fas fa-link mr-1"></i> Link 
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="p-6">
-                        <div class="mb-4 text-center">
-                            <img src="https://icones.pro/wp-content/uploads/2021/03/icone-d-arc-mignon-en-pixels-rouge.png" alt="Loading bar" class="w-16 h-16 mx-auto">
-                            <h3 class="text-xl font-bold text-gray-700">Leveling Up!!</h3>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                           Powered by curiosity, fueled by passion, aiming higher every day🤩
-                        </p>
-                    </div>
-                </div>
-            </div> </div> </section>            
-
-    <section id="experiences" class="py-20 relative">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="pixel-font text-3xl md:text-4xl rainbow-text mb-4">My Experiences!🌍</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto"></div>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="project-card">
-                    <div class="p-6">
-                        <div class="mb-4 text-center">
-                            <i class="fas fa-heart text-4xl text-pink-500 mb-3"></i>
-                            <h3 class="text-xl font-bold text-gray-700">IEDC Documentation SEED</h3>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            Member of IEDC Subcore SEED in the Documentation Team for the year 2025-26🌸
-                        </p>
-                    </div>
-                </div>
-            
-                <div class="project-card">
-                    <div class="p-6">
-                        <div class="mb-4 text-center">
-                            <i class="fas fa-heart text-4xl text-pink-500 mb-3"></i>
-                            <h3 class="text-xl font-bold text-gray-700">Confluence 2.0 Volunteer</h3>
-                        </div>
-                        <p class="text-gray-600 mb-4">
-                            Volunteered in the Food & Refreshments committee of Confluence 2.0🌸
-                        </p>
-                    </div>
-                </div>
-            </div> </div> </section>
+        </div>
+    </section>
 
     <section id="contact" class="py-20 relative">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="pixel-font text-3xl md:text-4xl rainbow-text mb-4">Let's Be Friends! 💌</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-mint-400 to-yellow-400 mx-auto"></div>
+                <h2 class="pixel-font text-3xl md:text-4xl rainbow-text mb-4">Get In Touch! 📞</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-pink-400 to-purple-400 mx-auto"></div>
             </div>
-
-            <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-                <div class="pixel-card p-8">
-                    <h3 class="text-2xl font-bold text-gray-700 mb-6 text-center">
-                        Send Me a Message! ✨
-                    </h3>
-                    <form class="contact-form space-y-4">
-                        <div>
-                            <input type="text" placeholder="Your Sweet Name 🌸" class="w-full" required>
-                        </div>
-                        <div>
-                            <input type="email" placeholder="Your Email ✉️" class="w-full" required>
-                        </div>
-                        <div>
-                            <input type="text" placeholder="What's the matter about? 💫" class="w-full" required>
-                        </div>
-                        <div>
-                            <textarea rows="5" placeholder="Your Message 💖 Tell me about your project ideas!" class="w-full resize-none" required></textarea>
-                        </div>
-                        <button type="submit" class="pixel-btn w-full">
-                            <i class="fas fa-paper-plane mr-2"></i>
-                            Send it! 💕
-                        </button>
-                    </form>
-                </div>
-
-                <div class="pixel-card p-8">
-                    <h3 class="text-2xl font-bold text-gray-700 mb-6 text-center">
-                        Find Me Online! 🌐
-                    </h3>
-                    
-                    <div class="space-y-6">
-                        <a href="https://github.com/sithaara-haveline" target="_blank" class="flex items-center p-4 bg-pink-50 rounded-lg hover:bg-pink-100 transition-colors cursor-pointer">
-                            <i class="fab fa-github text-2xl text-pink-500 mr-4"></i>
-                            <div>
-                                <h4 class="font-semibold text-gray-700">GitHub</h4>
-                                <p class="text-gray-600 text-sm">Check out my little codes! 💖</p>
-                            </div>
-                        </a>
-                        
-                        <a href="www.linkedin.com/in/sithaara-jubab" target="_blank" class="flex items-center p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors cursor-pointer">
-                            <i class="fab fa-linkedin text-2xl text-purple-500 mr-4"></i>
-                            <div>
-                                <h4 class="font-semibold text-gray-700">LinkedIn</h4>
-                                <p class="text-gray-600 text-sm">Let's connect professionally! 🌟</p>
-                            </div>
-                        </a>
-                        
-                        
-                        <div class="flex items-center p-4 bg-mint-50 rounded-lg hover:bg-mint-100 transition-colors">
-                            <i class="fas fa-envelope text-2xl text-green-500 mr-4"></i>
-                            <div>
-                                <h4 class="font-semibold text-gray-700">Email</h4>
-                                <p class="text-gray-600 text-sm"><a href="mailto:u2408077@rajagiri.edu.in">u2408077@rajagiri.edu.in</a> 💌</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-8 text-center">
-                        <img src="https://static.vecteezy.com/system/resources/thumbnails/051/988/381/small/set-of-pixel-8-bit-elements-pixelated-pastel-color-speech-bubbles-with-text-emoticon-with-face-and-cat-stars-shape-on-white-background-vector.jpg" alt="Pixel Elements" class="w-48 h-32 mx-auto pixel-icon floating">
-                        <p class="text-gray-600 mt-4 font-semibold">
-                            Can't wait to hear from you! ✨
-                        </p>
-                    </div>
-                </div>
+            
+            <div class="pixel-card p-8 max-w-lg mx-auto">
+                <p class="text-center text-gray-600 mb-6">
+                    Have a project or just want to chat about AI and cute pixel art? Send a message!
+                </p>
+                <form class="contact-form space-y-4" action="#" method="POST">
+                    <input type="text" name="name" placeholder="Your Name" required class="w-full">
+                    <input type="email" name="email" placeholder="Your Email" required class="w-full">
+                    <textarea name="message" rows="4" placeholder="Your Message..." required class="w-full"></textarea>
+                    <button type="submit" class="pixel-btn w-full flex items-center justify-center">
+                        <i class="fas fa-paper-plane mr-2"></i>
+                        Send Message
+                    </button>
+                </form>
             </div>
         </div>
     </section>
 
-    <footer class="py-12 bg-white bg-opacity-90 backdrop-filter backdrop-blur-lg border-t-2 border-pink-200">
-        <div class="container mx-auto px-6 text-center">
-            <div class="mb-6">
-                <div class="pixel-font text-2xl rainbow-text mb-4">
-                    ✨ Sithaara.dev ✨
-                </div>
-                <p class="text-gray-600">
-                    Made with 💖 and lots of mistakes but i still worked hard on this!
-                </p>
-            </div>
-            
-            <div class="flex justify-center space-x-6 mb-6">
-                <a href="https://github.com/sithaara-haveline" target="_blank" title="GitHub">
-                    <i class="fab fa-github text-pink-400 text-2xl hover:text-pink-600 transition-colors sparkle"></i>
+    <footer class="py-8 text-center bg-black bg-opacity-30 text-white mt-10">
+        <div class="container mx-auto px-6">
+            <p class="text-lg mb-4">Find Me Here:</p>
+            <div class="flex justify-center space-x-6 text-2xl">
+                <a href="www.linkedin.com/in/sithaara-jubab" target="_blank" class="hover:text-pink-300 transition duration-300">
+                    <i class="fab fa-linkedin"></i>
                 </a>
-                <a href="www.linkedin.com/in/sithaara-jubab" target="_blank" title="LinkedIn">
-                    <i class="fab fa-linkedin text-purple-400 text-2xl hover:text-purple-600 transition-colors sparkle"></i>
+                <a href="#" target="_blank" class="hover:text-pink-300 transition duration-300">
+                    <i class="fab fa-github"></i>
                 </a>
-                <a href="mailto:u2408077@rajagiri.edu.in" title="Email">
-                    <i class="fas fa-envelope text-mint-400 text-2xl hover:text-mint-600 transition-colors sparkle"></i>
+                <a href="mailto:your.email@example.com" class="hover:text-pink-300 transition duration-300">
+                    <i class="fas fa-envelope"></i>
                 </a>
             </div>
-            
-            <div class="border-t border-pink-200 pt-6">
-                <p class="text-gray-500 text-sm">
-                    © 2025 Sithaara.dev • Reaching for the stars through code! 🌈
-                </p>
-            </div>
+            <p class="mt-6 text-sm">
+                Made with 💖 and Pixels by Sithaara Jubab Roshan © 2025
+            </p>
         </div>
     </footer>
-
-    <script src="main.js"></script>
-
 </body>
 </html>

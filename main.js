@@ -52,7 +52,7 @@ document.querySelector('.contact-form').addEventListener('submit', function(e) {
 
 // Add some interactive sparkles on mouse move
 document.addEventListener('mousemove', function(e) {
-    if (Math.random() > 0.95) {
+    if (Math.random() > 0.70) {
         const sparkle = document.createElement('div');
         sparkle.innerHTML = '✨';
         sparkle.style.position = 'fixed';
@@ -94,3 +94,4 @@ animateSkillBars();
 console.log('%c✨ Hello there, fellow coder! ✨', 'color: #FFB3D9; font-size: 18px; font-weight: bold;');
 console.log('%cWelcome to my portfolio! 💖', 'color: #E6B3FF; font-size: 14px;');
 console.log('%cMade with love and lots of pixel art! 🌈', 'color: #B3D9FF; font-size: 14px;');
+
